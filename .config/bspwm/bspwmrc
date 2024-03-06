@@ -1,12 +1,18 @@
 #!/bin/bash
 
-pgrep -x sxhkd > /dev/null || sxhkd &
+Monitors
+if [[ $(xrandr -q | grep 'HDMI-0 connected') ]]; then
+bspc wm -O HDMI-0 DP-4
+xrandr --output "HDMI-0" --primary --mode 1920x1080 --rotate normal --output DP-4 --mode 1920x1080 --rotate normal --left-of HDMI-0
+fi
 
-bspc monitor -d I II III IV V VI VII VIII IX X
+# Workspaces
+bspc monitor HDMI-0 -d 1 2 3 4 
+bspc monitor DP-4 -d 5 6 7 8 
 
 # BSPWM Configuration
 bspc config border_width         2
-bspc config window_gap          12
+bspc config window_gap           10
 bspc config split_ratio          0.52
 bspc config borderless_monocle   true
 bspc config gapless_monocle      true
@@ -16,7 +22,28 @@ bspc rule -a flameshot state='floating'
 bspc rule -a *:SPLASH state=floating
 bspc desktop -f 1
 
-# Init-Daemons
-command -v sxhkd && sxhkd &
-command -v picom && picom &
-command -v dunst && dunst &
+# Daemons
+command -v sxhkd >/dev/null && pkill -x sxhkd; sleep 1; sxhkd &
+command -v picom >/dev/null && pkill -x picom; sleep 1; picom &
+command -v dunst >/dev/null && pkill -x dunst; sleep 1; dunst &
+
+# Run polkit daemon if doesn't started.
+[ -n "$(pidof xfce-polkit)" ] || /usr/lib/xfce-polkit/xfce-polkit &
+
+# Run EWW.
+#/sbin/eww -c $HOME/.config/eww/bar --restart open bar &
+
+# Redshift (adjust color temperature)
+CONTENT=$(curl -s https://freegeoip.app/json/) 
+longitude=$(echo $CONTENT | jq .longitude)
+latitude=$(echo $CONTENT | jq .latitude)
+command -v redshift >/dev/null && pkill -x redshift; sleep 1; redshift -l $latitude:$longitude &
+
+# Keyboard
+setxkbmap -layout us -variant intl -option "compose:c,compose:menu,lv3:ralt_switch"
+
+# Fix cursor
+xsetroot -cursor_name left_ptr &
+
+# Wallpaper
+nitrogen --restore

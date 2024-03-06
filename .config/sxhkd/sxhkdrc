@@ -11,7 +11,7 @@ super + b
         chromium
 
 # file manager
-super + e
+super + d
         thunar
 
 # application launcher
@@ -39,7 +39,7 @@ super + alt + x
 	kill -9 -1
 
 # close and kill windows
-super + {_,shift + }w
+super + {_,shift + }q
 	bspc node -{c,k}
 
 #----~ Workspace Switching ~----#
@@ -110,6 +110,11 @@ XF86MonBrightnessUp
 	brightnessctl set +5%
 
 ## music controls
-#super  + {XF86AudioPrev, XF86AudioNext, XF86AudioPause}
-#	playerctl {previous, next, play-pause}
-#XF86Display : xrandr --output HDMI1 --auto --primary --output eDP1 --auto --right-of HDMI1
+XF86AudioPrev
+    playerctl previous
+
+XF86AudioNext
+    playerctl next
+
+XF86AudioPlay
+    playerctl play-pause
