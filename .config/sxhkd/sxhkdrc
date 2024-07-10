@@ -1,28 +1,61 @@
-#
-# wm independent hotkeys
-#
+#################################################
+#	███████╗██╗  ██╗██╗  ██╗██╗  ██╗██████╗		#
+#	██╔════╝╚██╗██╔╝██║  ██║██║ ██╔╝██╔══██╗	#
+#	███████╗ ╚███╔╝ ███████║█████╔╝ ██║  ██║	#
+#	╚════██║ ██╔██╗ ██╔══██║██╔═██╗ ██║  ██║	#
+#	███████║██╔╝ ██╗██║  ██║██║  ██╗██████╔╝	#
+#	╚══════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝  ╚═╝╚═════╝		#
+#################################################
 
-# spawn terminal
+##---------- Keybindings ----------##
+
+# Terminal
 super + Return
         alacritty
 	
-# browser
+# Browser
 super + b
         chromium
 
-# file manager
+# File Manager
 super + d
         thunar
 
-# application launcher
+# Application Launcher
 super + @space
         rofi -show drun
 
-# screenshot
+# Screenshot
 Print
         flameshot gui
 
-###BSPWM KEYBINDINGS###
+##---------- System Keys ----------##
+
+# Music
+XF86AudioPrev
+    playerctl previous
+
+XF86AudioNext
+    playerctl next
+
+XF86AudioPlay
+    playerctl play-pause
+
+# Volume
+XF86AudioLowerVolume
+	pamixer -u && pamixer -d 5
+XF86AudioRaiseVolume
+	pamixer -u && pamixer -i 5
+XF86AudioMute
+	pamixer -t
+
+# Brightness
+XF86MonBrightnessDown
+	brightnessctl set 5%-
+XF86MonBrightnessUp
+	brightnessctl set +5%
+
+##---------- BSPWM ----------##
 
 #----~ Init ~----#
 
@@ -80,7 +113,7 @@ super + shift + r
 #----~ Focus Settings ~----#
 
 # focus the node in the given direction
-super + {_, shift + }{h, j, k, l}
+super + {_, shift + }{Left, Down, Up, Right}
 	bspc node -{f,s} {west,south,north,east}
 
 # focus the next/previous node in the current desktop
@@ -95,26 +128,13 @@ super + bracket{left,right}
 super + {_,shift + }{1-9}
 	bspc {desktop -f,node -d} '^{1-9}'
 
-# volume
-XF86AudioLowerVolume
-	pamixer -u && pamixer -d 5
-XF86AudioRaiseVolume
-	pamixer -u && pamixer -i 5
-XF86AudioMute
-	pamixer -t
 
-# brightness control
-XF86MonBrightnessDown
-	brightnessctl set 5%-
-XF86MonBrightnessUp
-	brightnessctl set +5%
+##---------- Automation ----------##
 
-## music controls
-XF86AudioPrev
-    playerctl previous
+# Mouse Click
+# 1
+#     ~/.config/sxhkd/scripts/mouse_click.sh
 
-XF86AudioNext
-    playerctl next
-
-XF86AudioPlay
-    playerctl play-pause
+# Toggle 'f' remapping
+super + alt + f
+    ~/.config/sxhkd/scripts/toggle_remap.sh

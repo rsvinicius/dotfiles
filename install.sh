@@ -3,11 +3,15 @@
 # Update and upgrade system
 sudo pacman -Syu
 
+# User directories
+sudo pacman -S xdg-user-dirs
+xdg-user-dirs-update
+
 # Terminal utilities
 sudo pacman -S neofetch alacritty micro ranger htop
 
 # Install Xorg, Bspwm and essentials
-sudo pacman -S xorg-server xorg-xinit xorg-xrandr xorg-xsetroot picom bspwm sxhkd nitrogen rofi lxappearance-gtk3 gnome-themes-extra
+sudo pacman -S xorg-server xorg-xinit xorg-xrandr xorg-xsetroot picom bspwm sxhkd nitrogen rofi lxappearance-gtk3 gnome-themes-extra gnome-icon-theme
 
 # File manager
 sudo pacman -S thunar thunar-archive-plugin thunar-volman
@@ -18,19 +22,21 @@ sudo pacman -S pamixer playerctl
 # Nvidia Proprietary Drivers (Works for Turing)
 sudo pacman -S nvidia nvidia-utils nvidia-settings nvidia-open
 
-# Bluetooth 
+# Bluetooth
 sudo pacman -S bluez bluez-utils blueman
 sudo systemctl enable bluetooth
 
 # Fonts and icons
-sudo pacman -S ttf-font-awesome noto-fonts ttf-roboto ttf-firacode-nerd
+sudo pacman -S nerd-fonts ttf-font-awesome noto-fonts ttf-roboto ttf-firacode-nerd ttf-liberation
+-S nerd-fonts-jetbrains-mono
 
 # Protocols
-sudo pacman -S avahi gvfs dosfstools libnotify
+sudo pacman -S avahi gvfs dosfstools libnotify amd-ucode
 sudo systemctl enable avahi-daemon
 
-# Others
-sudo pacman -S flameshot chromium firefox
+# Security
+sudo pacman -S nftables ufw
 
-# Btrfs only
-sudo pacman -S snapper
+# Programs
+sudo pacman -S flameshot chromium firefox discord unzip zip
+
