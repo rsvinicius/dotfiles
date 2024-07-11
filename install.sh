@@ -11,7 +11,7 @@ xdg-user-dirs-update
 sudo pacman -S neofetch alacritty micro ranger htop
 
 # Install Xorg, Bspwm and essentials
-sudo pacman -S xorg-server xorg-xinit xorg-xrandr xorg-xsetroot picom bspwm sxhkd nitrogen rofi lxappearance-gtk3 gnome-themes-extra gnome-icon-theme
+sudo pacman -S xorg-server xorg-xinit xorg-xrandr xorg-xsetroot picom bspwm polybar sxhkd nitrogen rofi lxappearance-gtk3 gnome-themes-extra gnome-icon-theme
 
 # File manager
 sudo pacman -S thunar thunar-archive-plugin thunar-volman
