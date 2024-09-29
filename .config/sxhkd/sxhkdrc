@@ -21,9 +21,13 @@ super + b
 super + d
         thunar
 
+# Intellij
+super + i
+        bash -i -c 'idea'
+
 # Application Launcher
 super + @space
-        rofi -show drun
+        bash -i -c 'rofi -show drun'
 
 # Screenshot
 Print
@@ -70,7 +74,7 @@ super + alt + {q,r}
 # quit all ~ return to login
 super + alt + x
 	kill -9 -1
-
+1
 # close and kill windows
 super + {_,shift + }q
 	bspc node -{c,k}
@@ -127,14 +131,3 @@ super + bracket{left,right}
 # focus or send to the given desktop
 super + {_,shift + }{1-9}
 	bspc {desktop -f,node -d} '^{1-9}'
-
-
-##---------- Automation ----------##
-
-# Mouse Click
-# 1
-#     ~/.config/sxhkd/scripts/mouse_click.sh
-
-# Toggle 'f' remapping
-super + alt + f
-    ~/.config/sxhkd/scripts/toggle_remap.sh
